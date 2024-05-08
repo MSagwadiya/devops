@@ -1,0 +1,12 @@
+- name: Install a list of packages
+  ansible.builtin.apt:
+    pkg: "{{ common_packages_to_install }}"
+    update_cache: yes
+    state: latest
+  register: package_install_result
+  ignore_errors: true
+
+- name: Check if any package installation failed
+  fail:
+    msg: "Failed to install packages"
+  when: package_install_result is failed

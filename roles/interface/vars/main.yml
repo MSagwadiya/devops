@@ -1,0 +1,6 @@
+---
+# vars file for interface
+
+
+netplan_renderer: networkd
+netplan_version: 2

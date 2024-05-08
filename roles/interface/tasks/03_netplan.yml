@@ -1,0 +1,7 @@
+- name: Creating netplan configs 
+  ansible.builtin.template:
+    src: netplan.yml.j2
+    dest: /etc/netplan/main.yaml
+    owner: root
+    group: root
+    mode: '0644'

@@ -1,0 +1,11 @@
+---
+- name: restart sshd
+  ansible.builtin.service:
+    name: sshd
+    state: restarted
+  become: true 
+
+- name: grub mkconfig
+  ansible.builtin.command:
+    cmd: /sbin/grub2-mkconfig
+  become: true

@@ -1,0 +1,6 @@
+---
+# handlers file for interface
+- name: grub mkconfig
+  ansible.builtin.command:
+    cmd: /sbin/grub2-mkconfig
+  become: true

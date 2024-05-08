@@ -1,0 +1,8 @@
+- name: Placing the kernel core pattern 
+  sysctl:
+    name: kernel.core_pattern
+    value: "{{ kernel_core_pattern_value }}"
+    state: present
+    reload: yes
+    sysctl_file: "{{ kernel_core_pattern_path }}"
+    

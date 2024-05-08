@@ -1,0 +1,5 @@
+- name: Disable Apport
+  ansible.builtin.replace:
+    path: "{{ apport_config_path }}"
+    regexp: 'enabled=1'
+    replace: "{{ apport_config_value }}"

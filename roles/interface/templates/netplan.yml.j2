@@ -1,0 +1,17 @@
+network:
+  version: {{ netplan_config['network']['version'] | default(netplan_version) }}
+  renderer: {{ netplan_config['network']['renderer'] | default(netplan_renderer) }}
+  ethernets:
+{% for interface in hostvars[inventory_hostname].interfaces %}
+  {{ interface.name }}:
+      addresses: {{ interface.ip }}
+{% if hostvars[inventory_hostname].config_context.ifname_default_gateway %}
+      gateway4: {{ hostvars[inventory_hostname].config_context.ifname_default_gateway }}
+{% endif %}
+{% if hostvars[inventory_hostname].config_context.ifname_nameserver_addresses %}
+      nameservers:
+        addresses: {{ hostvars[inventory_hostname].config_context.ifname_nameserver_addresses }}
+        search: {{ hostvars[inventory_hostname].config_context.ifname_search_domain }}
+
+{% endif %}
+{% endfor %}

@@ -1,0 +1,9 @@
+- name: Configure sshd
+  lineinfile:
+    path: "/etc/ssh/sshd_config"
+    regex: "^(#)?{{ item.key }}"
+    line: "{{ item.key }} {{ item.value }}"
+    state: present
+  loop: "{{ sshd_config_items }}"
+  notify:
+    - restart sshd

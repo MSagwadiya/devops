@@ -1,0 +1,4 @@
+- name: Remove execute permission from update-motd.d scripts
+  ansible.builtin.file:
+    path: /etc/update-motd.d/
+    mode: 'a-x'

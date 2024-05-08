@@ -1,0 +1,6 @@
+- name: Stop and Disable irqbalance
+  ansible.builtin.service:
+    name: irqbalance
+    state: stopped
+    enabled: false
+    

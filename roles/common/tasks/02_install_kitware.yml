@@ -1,0 +1,14 @@
+- name: Get kitware key file 
+  ansible.builtin.shell:
+    wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc | gpg --dearmor - | sudo tee /usr/share/keyrings/kitware-archive-keyring.gpg
+  become: true
+
+- name: Get the Repository
+  ansible.builtin.shell:
+    echo 'deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ focal main' | sudo tee /etc/apt/sources.list.d/kitware.list
+
+- name: Install Kitware
+  ansible.builtin.apt:
+    name: kitware-archive-keyring
+    state: present
+    update_cache: true

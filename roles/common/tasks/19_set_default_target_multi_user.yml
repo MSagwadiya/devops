@@ -1,0 +1,5 @@
+- name: Set default target to multi-user
+  ansible.builtin.service:
+    name: multi-user.target
+    state: started
+    enabled: yes

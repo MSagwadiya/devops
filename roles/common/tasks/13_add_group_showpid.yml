@@ -1,0 +1,4 @@
+- name: Add group showpid 
+  ansible.builtin.group:
+    name: showpid
+    state: present  

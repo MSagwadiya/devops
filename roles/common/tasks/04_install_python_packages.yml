@@ -1,0 +1,6 @@
+- name: Installing python packages
+  ansible.builtin.apt:
+    pkg: "{{ python_packages }}"
+    update_cache: yes
+    state: latest
+    

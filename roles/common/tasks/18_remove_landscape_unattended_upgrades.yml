@@ -1,0 +1,9 @@
+- name: Remove landscape-common package
+  ansible.builtin.apt:
+    name: landscape-common
+    state: absent
+    
+- name: Remove unattended-upgrades package
+  ansible.builtin.apt:
+    name: unattended-upgrades
+    state: absent

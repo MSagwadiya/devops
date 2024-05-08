@@ -1,0 +1,21 @@
+- import_tasks: 01_add_repository_for_toolchain.yml 
+- import_tasks: 02_install_kitware.yml 
+  when: ansible_distribution_version == "20.04"
+- import_tasks: 03_install_packages.yml 
+- import_tasks: 04_install_python_packages.yml 
+- import_tasks: 05_disable_ufw.yml 
+- import_tasks: 06_disable_apport.yml 
+- import_tasks: 07_configure_kernel_core_pattern.yml 
+- import_tasks: 08_configure_sshd.yml 
+- import_tasks: 09_set_kernel_grub_paramters.yml 
+- import_tasks: 10_stop_and_disable_irqbalance.yml 
+- import_tasks: 11_update_editor_to_vim.yml 
+- import_tasks: 12_set_tuned_profile.yml 
+- import_tasks: 13_add_group_showpid.yml 
+- import_tasks: 14_add_proc_mount_fstab.yml 
+- import_tasks: 15_replace_directory_mode_conf.yml 
+- import_tasks: 16_remove_execute_permission_update_motd.yml 
+- import_tasks: 17_set_timezone.yml 
+- import_tasks: 18_remove_landscape_unattended_upgrades.yml 
+- import_tasks: 19_set_default_target_multi_user.yml 
+- import_tasks: 20_setup_root_cronjobs.yml
