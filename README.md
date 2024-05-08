@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# DevOps
-
-=======
 # Directory Structure
 
 The project consists of the following files and directories:
@@ -30,4 +26,3 @@ The project consists of the following files and directories:
     - Once completed, it will automate the process of updating various information, ensuring synchronization between the infrastructure and NetBox.
 
 **Note**: While some tasks are currently manual, efforts are underway to automate them. Automation enhancements, such as those for updating interface names and synchronizing information with NetBox, are planned to streamline operations and improve efficiency.
->>>>>>> 342962e (Initial commit)
