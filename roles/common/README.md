@@ -53,7 +53,7 @@ List any other roles hosted on Galaxy that are required by this role. Include de
 ## Example Playbook
 
 ```yaml
-- name: Configure Network Interfaces
+- name: Intial Server Setup
   hosts: <server_ip>
   tasks:
     - import_role:
