@@ -35,13 +35,15 @@ This role consists of various tasks organized into separate playbooks:
 - `11_update_editor_to_vim.yml`
 - `12_set_tuned_profile.yml`
 - `13_add_group_showpid.yml`
-- `14_add_proc_mount_fstab.yml`
+- `14_mount_fstab.yml`
 - `15_replace_directory_mode_conf.yml`
 - `16_remove_execute_permission_update_motd.yml`
 - `17_set_timezone.yml`
 - `18_remove_landscape_unattended_upgrades.yml`
 - `19_set_default_target_multi_user.yml`
 - `20_setup_root_cronjobs.yml`
+- `21_install_exanic.yml`
+- `22_ipc.yml`
 - `main.yml`: Contains all tasks.
 
 ## Dependencies
