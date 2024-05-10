@@ -60,6 +60,7 @@ common_packages_to_install:
   - zstd
   - ufw
   - irqbalance
+  - cron
 
 apport_config_path: /etc/default/apport
 apport_config_value: 'enabled=0'
@@ -91,3 +92,7 @@ python_packages:
   - python3-psutil
   - python3-pandas
   
+exanic_version: v2.7.4
+
+logind_conf: "/etc/systemd/logind.conf"
+logind_ipc_value: "RemoveIPC=no"

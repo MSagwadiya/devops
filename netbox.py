@@ -55,23 +55,34 @@ def create_inventory(device_data, interface_data, ip_data):
             if device['name'] in interfaces_by_device:
                 for interface in interfaces_by_device[device['name']]:
                     interface_name = interface['name']
-                    ip_addresses = [ip['address'] for ip in ip_data if ip['assigned_object'] and ip['assigned_object']['device']['name'] == device['name'] and ip['assigned_object']['name'] == interface_name]
+                    ip_routes = []
+                    routing_policy = []
+                    if 'config_context' in device:
+                        if 'ifname_routes' in device['config_context'] and interface_name in device['config_context']['ifname_routes']:
+                            ip_routes = device['config_context']['ifname_routes'][interface_name]
+                        if 'ifname_routing_policy' in device['config_context'] and interface_name in device['config_context']['ifname_routing_policy']:
+                            routing_policy = device['config_context']['ifname_routing_policy'][interface_name]
+                    ip_addresses = [ip['address'] for ip in ip_data if ip['assigned_object'] and ip['assigned_object']['device']['name'] == device['name'] and ip['assigned_object']['name'] == interface_name]                       
                     mac_address = interface.get('mac_address', '').lower()
                     inventory['_meta']['hostvars'][hostname].setdefault('interfaces', []).append({
                         'name': interface_name,
                         'mac_address': mac_address,
                         'enabled': interface['enabled'],
-                        'ip': ip_addresses
+                        'ip': ip_addresses,
+                        'routes': ip_routes,
+                        'routing_policy': routing_policy
                     })
                     
             if 'config_context' in device:
                 inventory['_meta']['hostvars'][hostname]['config_context'] = device['config_context']
-
+                
+        
 
     for device_name, device_vars in inventory['_meta']['hostvars'].items():
         for iface in device_vars.get('interfaces', []):
             if not iface.get('ip'):
                 iface['ip'] = []
+                
 
     return inventory
 
@@ -81,4 +92,4 @@ ip_data = get_data(f'{NETBOX_URL}/api/ipam/ip-addresses/')
 
 inventory = create_inventory(device_data, interface_data, ip_data)
 
-print(json.dumps(inventory, indent=4))
+print(json.dumps(inventory, indent=2))

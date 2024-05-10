@@ -1,2 +1,3 @@
+- import_tasks: 01_grub_parameters.yml
 - import_tasks: 02_udev.yml
 - import_tasks: 03_netplan.yml

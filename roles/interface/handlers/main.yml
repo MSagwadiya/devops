@@ -4,3 +4,8 @@
   ansible.builtin.command:
     cmd: /sbin/grub2-mkconfig
   become: true
+
+- name: Applying Netplan Configuration
+  command: netplan apply
+  listen: netplan apply config
+  become: true

@@ -1,7 +1,38 @@
+- name: Capturing Existing Configuration
+  ansible.builtin.find:
+    paths: /etc/netplan/
+    patterns: "*.yml,*.yaml"
+  register: netplan_configs
+
+- name: Backup Existing Configuration
+  ansible.builtin.copy:
+    remote_src: true
+    src: "{{ item['path'] }}"
+    dest: "{{ item['path'] }}.bkp"
+  with_items: "{{ netplan_configs['files'] }}"
+  when:
+    - item['path'] != netplan_config_file
+    - hostvars[inventory_hostname]['interfaces'] != []
+    
+- name: Removing Existing Configurations
+  file:
+    path: "{{ item['path'] }}"
+    state: absent
+  become: true
+  with_items: "{{ netplan_configs['files'] }}"
+  when:
+    - item['path'] != netplan_config_file
+    - hostvars[inventory_hostname]['interfaces'] != []
+
 - name: Creating netplan configs 
   ansible.builtin.template:
     src: netplan.yml.j2
-    dest: /etc/netplan/main.yaml
+    dest: /etc/netplan/ansible_netplan.yaml
     owner: root
     group: root
-    mode: '0644'
+    mode: '0600'
+    backup: true
+  register: new_netplan_configs 
+  when: hostvars[inventory_hostname]['interfaces'] != []
+  notify: netplan generate config
+    

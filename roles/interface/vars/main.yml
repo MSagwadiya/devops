@@ -1,6 +1,7 @@
 ---
 # vars file for interface
 
+netplan_config_file: /etc/netplan/ansible_netplan.yaml
 
 netplan_renderer: networkd
 netplan_version: 2

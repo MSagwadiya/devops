@@ -1,17 +1,45 @@
+#jinja2: trim_blocks: True, lstrip_blocks: True
 network:
   version: {{ netplan_config['network']['version'] | default(netplan_version) }}
   renderer: {{ netplan_config['network']['renderer'] | default(netplan_renderer) }}
   ethernets:
-{% for interface in hostvars[inventory_hostname].interfaces %}
-  {{ interface.name }}:
-      addresses: {{ interface.ip }}
-{% if hostvars[inventory_hostname].config_context.ifname_default_gateway %}
-      gateway4: {{ hostvars[inventory_hostname].config_context.ifname_default_gateway }}
-{% endif %}
-{% if hostvars[inventory_hostname].config_context.ifname_nameserver_addresses %}
+    {% for interface in hostvars[inventory_hostname].interfaces %}
+    {{ interface.name }}:
+      addresses:
+        {% for address in interface.ip | default([]) %}
+        - {{ address }}
+        {% endfor %}
+      {% if hostvars[inventory_hostname].config_context.ifname_nameserver_addresses | default([]) %}
       nameservers:
-        addresses: {{ hostvars[inventory_hostname].config_context.ifname_nameserver_addresses }}
-        search: {{ hostvars[inventory_hostname].config_context.ifname_search_domain }}
-
-{% endif %}
-{% endfor %}
+        addresses:
+          {% for ns in hostvars[inventory_hostname].config_context.ifname_nameserver_addresses %}
+          - {{ ns }}
+          {% endfor %}
+      {% endif %}
+      {% if hostvars[inventory_hostname].config_context.ifname_search_domain | default([]) %}
+      search:
+        {% for do in hostvars[inventory_hostname].config_context.ifname_search_domain %}
+        - "{{ do }}"
+        {% endfor %}
+      {% endif %}
+      {% if interface.routes | default([]) %}
+      routes:
+        {% for route in interface.routes %}
+        - to: {{ route.to }}
+          via: {{ route.via }}
+          {% if route.table is defined %}
+          table: {{ route.table }}
+          {% endif %}
+          {% if route.on_link is defined %}
+          on-link: {{ route.on_link }}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+      {% if interface.routing_policy  | default([]) %}
+      routing-policy:
+        {% for policy in interface.routing_policy %}
+        - from: {{ policy.from }}
+          table: {{ policy.table }}
+        {% endfor %}
+      {% endif %}
+    {% endfor %}

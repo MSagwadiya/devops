@@ -26,7 +26,6 @@
     minute: "0"
     hour: "5"
     job: "{{ ansible_env.HOME }}/scripts/fix_fragmentation.sh"
-    cron_file: "fix_fragmentation_00_05"
 
 - name: Schedule fix_fragmentation.sh at 00:08
   ansible.builtin.cron:
@@ -34,4 +33,3 @@
     minute: "0"
     hour: "8"
     job: "{{ ansible_env.HOME }}/scripts/fix_fragmentation.sh"
-    cron_file: "fix_fragmentation_00_08"
