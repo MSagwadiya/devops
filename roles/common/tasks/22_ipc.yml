@@ -1,0 +1,5 @@
+- name: Remove IPC to no 
+  ansible.builtin.replace:
+    path: "{{ logind_conf }}"
+    regexp: '#RemoveIPC=yes'
+    replace: "{{ logind_ipc_value }}"

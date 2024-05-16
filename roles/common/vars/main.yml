@@ -61,6 +61,14 @@ common_packages_to_install:
   - ufw
   - irqbalance
   - cron
+  - gcc-14 
+  - g++-14
+  - dos2unix
+  - mlocate
+  - tcpdump
+  - tshark
+  - fzf
+  - locate 
 
 apport_config_path: /etc/default/apport
 apport_config_value: 'enabled=0'
@@ -96,3 +104,7 @@ exanic_version: v2.7.4
 
 logind_conf: "/etc/systemd/logind.conf"
 logind_ipc_value: "RemoveIPC=no"
+
+bashrc_conf: "/etc/bash.bashrc"
+
+vimrc_conf: "/etc/vim/vimrc"

@@ -1,0 +1,27 @@
+- name: Configure fuzzy find for bash history (system-wide)
+  ansible.builtin.blockinfile:
+    path: "{{ bashrc_conf }}"
+    block: |
+      #A value of ‘ignoredups’ causes lines which match the previous history entry to not be saved.
+      #A value of ‘ignoreboth’ is shorthand for ‘ignorespace’ and ‘ignoredups’. 
+      #A value of ‘erasedups’ causes all previous lines matching the current line to be removed from the history list before that line is saved. 
+      #Any value not in the above list is ignored.
+      
+      HISTCONTROL=ignoreboth
+
+      # append to the history file, don't overwrite it
+      shopt -s histappend
+
+      # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+      # leaving empty means set history to infinite
+      HISTSIZE=
+      HISTFILESIZE=    
+       
+      # enable fzf config for bash
+      source /usr/share/doc/fzf/examples/key-bindings.bash
+      source /usr/share/doc/fzf/examples/completion.sh      
+    insertafter: EOF
+    marker: "\n<!-- {mark} ANSIBLE MANAGED BLOCK FOR BASH HISTORY-->\n"
+    state: present
+  become: true
+   

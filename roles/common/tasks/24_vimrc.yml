@@ -1,0 +1,41 @@
+- name: Configure vimrc 
+  ansible.builtin.blockinfile:
+    path: "{{ bashrc_conf }}"
+    block: |
+      " Tabing through commands and files like bash
+      set wildmode=longest,list,full
+      set nocompatible
+      set hlsearch
+      " set nowrap
+      " Resize splits evenly when terminal size changes
+      autocmd VimResized * wincmd =
+      set bs=indent,eol,start
+      set mouse=r
+      set history=10000
+      set ruler
+      set viminfo='20,\"50
+      " A tab produces a 2-space indentation
+      set softtabstop=2
+      set shiftwidth=2
+      set expandtab
+      set smarttab
+      set showcmd
+      set showmatch
+      set showmode
+      set incsearch
+      set splitright
+      set splitbelow
+      filetype plugin indent on
+      " Vim jump to the last position when reopening a file.
+      au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+      " Optional
+      " C/C++ programming helpers
+      augroup csrc
+        au!
+        autocmd FileType *      set nocindent smartindent
+        autocmd FileType c,cpp  set cindent
+      augroup END
+    insertafter: EOF
+    marker: "\n<!-- {mark} ANSIBLE MANAGED BLOCK FOR VIM SETTINGS -->\n"
+    state: present
+  become: true

@@ -7,3 +7,17 @@
   loop: "{{ sshd_config_items }}"
   notify:
     - restart sshd
+
+- name: Disable password based authentication 
+  ansible.builtin.blockinfile:
+    path: "/etc/ssh/sshd_config"
+    block: |
+       PasswordAuthentication no
+       Match User !root
+              PasswordAuthentication yes
+    insertafter: EOF
+    marker: "\n<!-- {mark} ANSIBLE MANAGED BLOCK FOR SSH SETTINGS -->\n"
+    state: present
+  become: true
+  notify: 
+    - restart sshd

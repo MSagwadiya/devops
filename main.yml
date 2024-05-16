@@ -1,6 +1,6 @@
 ---
 - name: Running Roles From here
-  hosts: xyz
+  hosts: localhost
   become: true
   become_method: sudo 
   tasks:

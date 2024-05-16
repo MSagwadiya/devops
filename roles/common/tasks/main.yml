@@ -43,3 +43,7 @@
   tags: exanic_install
 - import_tasks: 22_ipc.yml
   tags: ipc 
+- import_tasks: 23_bashrc.yml
+  tags: bashrc
+- import_tasks: 24_vimrc.yml
+  tags: vimrc 

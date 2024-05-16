@@ -2,6 +2,6 @@
   ansible.builtin.lineinfile:
     path: /etc/default/grub
     state: present
-    line: GRUB_CMDLINE_LINUX="mce=ignore_ce nosoftlockup intel_idle.max_cstate=0 processor.max_cstate=0 mitigations=off isolcpus=0-7 nohz_full=0-7 rcu_nocbs=0-7 irqaffinity=8,9 selinux=0 audit=0 pcie_aspm=performance pci=noaer ipv6.disable=1"
+    line: GRUB_CMDLINE_LINUX=$GRUB_CMDLINE_LINUX" mce=ignore_ce nosoftlockup intel_idle.max_cstate=0 processor.max_cstate=0 mitigations=off isolcpus=0-7 nohz_full=0-7 rcu_nocbs=0-7 irqaffinity=8,9 selinux=0 audit=0 pcie_aspm=performance pci=noaer ipv6.disable=1"
   notify:
     - grub mkconfig
