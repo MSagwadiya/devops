@@ -3,3 +3,9 @@
     path: "{{ apport_config_path }}"
     regexp: 'enabled=1'
     replace: "{{ apport_config_value }}"
+
+- name: Disable the apport service
+  ansible.builtin.service:
+    name: apport
+    enabled: false 
+    state: stopped

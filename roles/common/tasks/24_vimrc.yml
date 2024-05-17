@@ -1,6 +1,6 @@
 - name: Configure vimrc 
   ansible.builtin.blockinfile:
-    path: "{{ bashrc_conf }}"
+    path: "{{ vimrc_conf }}"
     block: |
       " Tabing through commands and files like bash
       set wildmode=longest,list,full
@@ -36,6 +36,6 @@
         autocmd FileType c,cpp  set cindent
       augroup END
     insertafter: EOF
-    marker: "\n<!-- {mark} ANSIBLE MANAGED BLOCK FOR VIM SETTINGS -->\n"
+    marker: "\n\" <!-- {mark} ANSIBLE MANAGED BLOCK FOR VIM SETTINGS -->\n"
     state: present
   become: true

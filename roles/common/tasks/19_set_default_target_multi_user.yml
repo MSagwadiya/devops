@@ -1,5 +1,3 @@
 - name: Set default target to multi-user
-  ansible.builtin.service:
-    name: multi-user.target
-    state: started
-    enabled: yes
+  ansible.builtin.command:
+    cmd: systemctl set-default multi-user.target  

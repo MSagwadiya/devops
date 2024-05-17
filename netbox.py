@@ -7,7 +7,7 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 NETBOX_URL = 'http://192.168.1.4:8000/'
-NETBOX_TOKEN = 'befbb136f4d6ce6498e9e80e1c0e7ff759c86774'
+NETBOX_TOKEN = 'f3a4e67b106f234bde2c6851768fe7943c0294d7'
 FILTER_TAGS = ['ANSIBLE']
 
 headers = {

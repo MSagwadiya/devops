@@ -64,11 +64,10 @@ common_packages_to_install:
   - gcc-14 
   - g++-14
   - dos2unix
-  - mlocate
+  - locate
   - tcpdump
   - tshark
   - fzf
-  - locate 
 
 apport_config_path: /etc/default/apport
 apport_config_value: 'enabled=0'

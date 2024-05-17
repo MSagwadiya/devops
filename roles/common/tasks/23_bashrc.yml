@@ -1,3 +1,11 @@
+- name: Copying the key-bindings file to the fzf examples 
+  ansible.builtin.copy:
+    src: key-bindings.bash
+    dest: /usr/share/doc/fzf/examples/
+    owner: root
+    group: root
+    mode: "544"
+
 - name: Configure fuzzy find for bash history (system-wide)
   ansible.builtin.blockinfile:
     path: "{{ bashrc_conf }}"
@@ -19,9 +27,8 @@
        
       # enable fzf config for bash
       source /usr/share/doc/fzf/examples/key-bindings.bash
-      source /usr/share/doc/fzf/examples/completion.sh      
     insertafter: EOF
-    marker: "\n<!-- {mark} ANSIBLE MANAGED BLOCK FOR BASH HISTORY-->\n"
+    marker: "\n#<!-- {mark} ANSIBLE MANAGED BLOCK FOR BASH HISTORY-->\n"
     state: present
   become: true
    

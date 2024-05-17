@@ -34,5 +34,4 @@
     backup: true
   register: new_netplan_configs 
   when: hostvars[inventory_hostname]['interfaces'] != []
-  notify: netplan generate config
     
