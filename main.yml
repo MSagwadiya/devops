@@ -1,9 +1,9 @@
 ---
 - name: Running Roles From here
-  hosts: 192.168.1.7
+  hosts: 192.168.146.175
   become: true
   become_method: sudo 
   tasks:
     - import_role:
-        name: common
+        name: node_exporter
     

@@ -52,6 +52,8 @@ def create_inventory(device_data, interface_data, ip_data):
                     inventory.setdefault(tag_item['name'], {'hosts': []})['hosts'].append(hostname)
                     inventory['_meta']['hostvars'][hostname].setdefault('tags', {})[tag_item['name']] = True
             
+            inventory['_meta']['hostvars'][hostname]['static_hostname'] = device['name']
+            
             if device['name'] in interfaces_by_device:
                 for interface in interfaces_by_device[device['name']]:
                     interface_name = interface['name']

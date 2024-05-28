@@ -5,10 +5,12 @@ network:
   ethernets:
     {% for interface in hostvars[inventory_hostname].interfaces %}
     {{ interface.name }}:
+      {% if interface.ip | length > 0 %}
       addresses:
         {% for address in interface.ip | default([]) %}
         - {{ address }}
         {% endfor %}
+      {% endif %}
       {% if hostvars[inventory_hostname].config_context.ifname_nameserver_addresses | default([]) %}
       nameservers:
         addresses:

@@ -1,1 +1,1 @@
-<ip_of_machine> ansible_ssh_pass=xyz ansible_ssh_user=xyz ansible_become_password=xyz
+192.168.146.175 ansible_ssh_pass=xyz ansible_ssh_user=root ansible_become_password=1301

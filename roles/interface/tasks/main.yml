@@ -1,3 +1,6 @@
 - import_tasks: 01_grub_parameters.yml
+  tags: grub
 - import_tasks: 02_udev.yml
+  tags: udev
 - import_tasks: 03_netplan.yml
+  tags: netplan

@@ -27,7 +27,7 @@
 - name: Creating netplan configs 
   ansible.builtin.template:
     src: netplan.yml.j2
-    dest: /etc/netplan/ansible_netplan.yaml
+    dest: "{{ netplan_config_file }}"
     owner: root
     group: root
     mode: '0600'

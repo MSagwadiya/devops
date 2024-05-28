@@ -44,6 +44,9 @@ This role consists of various tasks organized into separate playbooks:
 - `20_setup_root_cronjobs.yml`
 - `21_install_exanic.yml`
 - `22_ipc.yml`
+- `23_bashrc.yml`
+- `24_vimrc.yml`
+- `25_static_hostname.yml`
 - `main.yml`: Contains all tasks.
 
 ## Dependencies

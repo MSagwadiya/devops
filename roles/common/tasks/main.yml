@@ -47,3 +47,6 @@
   tags: bashrc
 - import_tasks: 24_vimrc.yml
   tags: vimrc 
+- import_tasks: 25_static_hostname.yml
+  when: static_hostname != ansible_hostname
+  tags: hostname
