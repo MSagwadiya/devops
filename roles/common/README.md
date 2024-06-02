@@ -47,6 +47,7 @@ This role consists of various tasks organized into separate playbooks:
 - `23_bashrc.yml`
 - `24_vimrc.yml`
 - `25_static_hostname.yml`
+- `26_Disable_wifi_drivers.yml`
 - `main.yml`: Contains all tasks.
 
 ## Dependencies

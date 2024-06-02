@@ -1,0 +1,55 @@
+- name: Ensure the blacklist directory exists
+  file:
+    path: /etc/modprobe.d
+    state: directory
+    mode: '0755'
+
+- name: Blacklist WiFi drivers
+  blockinfile:
+    path: /etc/modprobe.d/blacklist.conf
+    block: |
+      # Blacklist WiFi drivers
+      blacklist ath9k
+      blacklist ath9k_htc
+      blacklist ath9k_common
+      blacklist ath9k_hw
+      blacklist ath10k_pci
+      blacklist ath10k_core
+      blacklist b43
+      blacklist b43legacy
+      blacklist brcmsmac
+      blacklist brcmfmac
+      blacklist carl9170
+      blacklist ipw2100
+      blacklist ipw2200
+      blacklist iwl3945
+      blacklist iwl4965
+      blacklist iwlwifi
+      blacklist libertas
+      blacklist libertas_cs
+      blacklist libertas_sdio
+      blacklist libertas_spi
+      blacklist libertas_tf
+      blacklist libertas_usb
+      blacklist mwl8k
+      blacklist p54_common
+      blacklist p54usb
+      blacklist p54pci
+      blacklist p54spi
+      blacklist p54legacy
+      blacklist rt61pci
+      blacklist rt73usb
+      blacklist rt2800pci
+      blacklist rt2800usb
+      blacklist rt2x00pci
+      blacklist rt2x00usb
+      blacklist rtl8180
+      blacklist rtl8187
+      blacklist rtl8192ce
+      blacklist rtl8192cu
+      blacklist rtl8192de
+      blacklist rtl8192se
+      blacklist rtl8723ae
+      blacklist rtl8723be
+      blacklist rtl8821ae
+      blacklist wl

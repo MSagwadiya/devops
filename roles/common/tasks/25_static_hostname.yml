@@ -2,4 +2,3 @@
 - name: Set static hostname
   ansible.builtin.hostname:
     name: "{{ static_hostname }}"
-  when: static_hostname == ansible_hostname

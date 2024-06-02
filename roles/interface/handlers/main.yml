@@ -2,7 +2,7 @@
 # handlers file for interface
 - name: grub mkconfig
   ansible.builtin.command:
-    cmd: /sbin/grub2-mkconfig
+    cmd: /sbin/update-grub
   become: true
 
 - name: Applying Netplan Configuration

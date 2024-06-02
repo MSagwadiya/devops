@@ -50,3 +50,5 @@
 - import_tasks: 25_static_hostname.yml
   when: static_hostname != ansible_hostname
   tags: hostname
+- import_tasks: 26_Disable_wifi_drivers.yml
+  tags: WiFi
