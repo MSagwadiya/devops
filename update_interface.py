@@ -46,7 +46,7 @@ else:
         sys.exit(0)
 
 nb = pynetbox.api('http://192.168.1.4:8000', token=token_value)
-cmd = f"ansible -u root -i {args.ip}, {args.ip} -m gather_facts | sed '0,/.*{{/s//{{/'"
+cmd = f"ansible -u root -k -i {args.ip}, {args.ip} -m gather_facts | sed '0,/.*{{/s//{{/'"
 
 fact = subprocess.check_output(cmd , shell=True)
 data = json.loads(fact)

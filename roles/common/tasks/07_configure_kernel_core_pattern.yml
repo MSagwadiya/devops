@@ -1,5 +1,5 @@
 - name: Placing the kernel core pattern 
-  sysctl:
+  ansible.posix.sysctl:
     name: kernel.core_pattern
     value: "{{ kernel_core_pattern_value }}"
     state: present

@@ -68,6 +68,7 @@ common_packages_to_install:
   - tcpdump
   - tshark
   - fzf
+  - jq
 
 apport_config_path: /etc/default/apport
 apport_config_value: 'enabled=0'

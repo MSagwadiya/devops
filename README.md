@@ -1,3 +1,11 @@
+## Installing the collection
+
+Before using the Roles, you need to install collections using the below command:
+
+```shell
+ansible-galaxy collection install -r requirements.yml
+```
+
 # Directory Structure
 
 The project consists of the following files and directories:

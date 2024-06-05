@@ -1,3 +1,17 @@
-- name: Disable UFW on {{ ansible_hostname }}
-  ufw:
-    state: disabled
+- name: Check if ufw package is installed (on Ubuntu).
+  command: service ufw status
+  register: ufw_installed
+  ignore_errors: true
+  changed_when: false
+  when:
+    - ansible_distribution == "Ubuntu"
+  check_mode: false
+
+- name: Disable the ufw firewall (on Ubuntu, if configured).
+  service:
+    name: ufw
+    state: stopped
+    enabled: false
+  when:
+    - ansible_distribution == "Ubuntu"
+    - ufw_installed.rc == 0

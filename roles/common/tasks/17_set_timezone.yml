@@ -1,5 +1,3 @@
 - name: set timezone to Asia/Tokyo
   timezone:
     name: Asia/Kolkata
-  become: true
-  become_method: sudo

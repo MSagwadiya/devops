@@ -11,7 +11,6 @@ Deploy prometheus node exporter using ansible.
 ## Role Variables
 
 All variables which can be overridden are stored in [defaults/main.yml](defaults/main.yml) 
-Please refer to the [collection docs](https://prometheus-community.github.io/ansible/branch/main/node_exporter_role.html) for description and default values of the variables.
 
 ## Example
 
