@@ -1,4 +1,2 @@
 - name: Update Editor to vim.basic
-  alternatives:
-    name: editor
-    path: /usr/bin/vim.basic
+  ansible.builtin.command: "update-alternatives --set editor /usr/bin/vim.basic"

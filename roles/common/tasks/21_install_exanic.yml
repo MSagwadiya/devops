@@ -5,7 +5,6 @@
     version: "{{ exanic_version }}"
 
 - name: Run 'install' target as root
-  make:
+  ansible.builtin.command:
     chdir: /exanic-software
-    target: install
-  become: true 
+    cmd: "make install"

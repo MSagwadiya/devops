@@ -37,7 +37,6 @@ common_packages_to_install:
   - linux-tools-generic
   - linux-tools-{{ ansible_kernel }}
   - make
-  - mysql-server
   - netcat-traditional
   - net-tools
   - network-manager
@@ -69,9 +68,12 @@ common_packages_to_install:
   - tshark
   - fzf
   - jq
+  - rsync
 
 apport_config_path: /etc/default/apport
 apport_config_value: 'enabled=0'
+
+timezone: Asia/Kolkata
 
 kernel_core_pattern_path: /etc/sysctl.d/50-coredump.conf
 kernel_core_pattern_value: core.%p.%e.%t

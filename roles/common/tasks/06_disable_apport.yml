@@ -1,8 +1,14 @@
+- name: Check if the file exist
+  ansible.builtin.stat:
+    path: "{{ apport_config_path }}"
+  register: apport_file 
+
 - name: Disable Apport
   ansible.builtin.replace:
     path: "{{ apport_config_path }}"
     regexp: 'enabled=1'
     replace: "{{ apport_config_value }}"
+  when: apport_file.stat.exists 
 
 - name: Disable the apport service
   ansible.builtin.service:

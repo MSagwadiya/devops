@@ -1,3 +1,2 @@
-- name: set timezone to Asia/Tokyo
-  timezone:
-    name: Asia/Kolkata
+- name: set timezone to Asia/Kolkata
+  ansible.builtin.command: timedatectl set-timezone {{ timezone }}
