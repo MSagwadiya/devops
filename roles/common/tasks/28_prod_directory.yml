@@ -1,0 +1,12 @@
+- name: Get the stat of /etc/opt/static_files
+  ansible.builtin.stat:
+    path: /etc/opt/static_files
+  register: static_files_stat
+
+- name: Create static_files directory
+  ansible.builtin.file:
+    path: /etc/opt/static_files
+    owner: airflow
+    group: airflow
+    mode: 0750
+  when: not static_files_stat.exists

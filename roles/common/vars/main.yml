@@ -58,6 +58,7 @@ common_packages_to_install:
   - whowatch
   - zstd
   - ufw
+  - openssh-server
   - irqbalance
   - cron
   - gcc-14 
@@ -69,6 +70,9 @@ common_packages_to_install:
   - fzf
   - jq
   - rsync
+  - smartmontools
+  - nvme-cli
+
 
 apport_config_path: /etc/default/apport
 apport_config_value: 'enabled=0'
@@ -110,3 +114,14 @@ logind_ipc_value: "RemoveIPC=no"
 bashrc_conf: "/etc/bash.bashrc"
 
 vimrc_conf: "/etc/vim/vimrc"
+
+users:
+  - username: airflow
+    shell: /bin/bash
+    home: yes
+    ssh_key: true
+  - username: netadmin
+    shell: /bin/bash
+    home: yes
+    sudo: yes
+    sudo_cmnd: /usr/sbin/netplan, /usr/bin/vi /etc/netplan/ansible_netplan.yaml

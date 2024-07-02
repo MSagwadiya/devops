@@ -1,0 +1,34 @@
+- name: Add users | Create users, shell, home dirs
+  user:
+    name: "{{ item.username }}"
+    shell: "{{ item.shell }}"
+    create_home: "{{ item.home }}"
+  with_items: "{{ users }}"
+
+- name: Setup | authorized key upload
+  authorized_key:
+    user: "{{ item.username }}"
+    key: "{{ lookup('file', 'files/{{ item.username }}.pub') }}"
+    path: "/home/{{ item.username }}/.ssh/authorized_keys"
+  with_items: "{{ users }}"
+  when: item.ssh_key is true
+
+- name: Setup | sudoers if any
+  block:
+    - name: create a sudoers file
+      ansible.builtin.file:
+        path: "/etc/sudoers.d/{{ item.username }}"
+        state: touch
+        mode: '0640'
+        owner: root
+        group: root
+      when: item.sudo is true
+      register: sudoers_file
+      with_items: "{{ users }}"
+
+    - name: Update the /etc/sudoers.d/{{ item.username }}
+      template:
+        src: sudoers.j2
+        dest: "/etc/sudoers.d/{{ item.username }}"
+      when: item.sudo is true
+      with_items: "{{ users }}"

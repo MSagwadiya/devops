@@ -1,0 +1,40 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - name: Ubuntu_24.04
+    image: geerlingguy/docker-ubuntu2404-ansible
+    pre_build_image: true
+    privileged: true
+    capabilities:
+      - SYS_ADMIN
+    cgroupns_mode: host
+    command:
+      - "/usr/sbin/init"
+      - "/usr/lib/systemd/systemd"
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:rw"
+    tmpfs:
+      - "/run"
+      - "/tmp"
+provisioner:
+  name: ansible
+  options:
+    vvv: true
+  playbooks:
+    create: create.yml
+    converge: converge.yml
+    destory: destory.yml
+scenario:
+  name: default
+  ## below test sequence starts with `destroy` to ensure we have clean infrastructure state.
+  test_sequence:
+    - create
+    - converge
+    - verify
+    - destory
+# you can disable the lint if you want but it is highly recommended to have it enabled as YAML linting is very essential to improve code quality checks
+lint: |
+  ansible-lint --exclude molecule/default/

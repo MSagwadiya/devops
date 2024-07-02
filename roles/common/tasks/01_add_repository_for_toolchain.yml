@@ -1,13 +1,15 @@
-- name: Add Repository for ToolChain from PPA
-  ansible.builtin.apt_repository:
-    repo: "{{ toolchain_repository }}"
-    update_cache: true
-
 - name: Install Packages for "{{ ansible_distribution_version }}"
   ansible.builtin.apt:
     pkg:
       - ca-certificates 
       - gpg 
       - wget
+      - dirmngr
+      - gpg-agent
     state: latest
+    update_cache: true
+  
+- name: Add Repository for ToolChain from PPA
+  ansible.builtin.apt_repository:
+    repo: "{{ toolchain_repository }}"
     update_cache: true

@@ -1,0 +1,13 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: ":("
+      become: true
+      ansible.builtin.systemd:
+        daemon_reload: true
+        
+    - name: Play the role
+      include_role:
+        name: node_exporter
+      ignore_errors: true

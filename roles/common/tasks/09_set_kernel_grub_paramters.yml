@@ -1,13 +1,20 @@
 ---
+- name: Get stat of {{ grub_config_path }}
+  stat:
+    path: "{{ grub_config_path }}"
+  register: bootloader_default_grub_stat
+
 - name: Set facts for the isolate the cores 
   ansible.builtin.set_fact:
     isolate_cpus: "{{ hostvars[inventory_hostname].config_context.isolate_cpus | default('0-7') }}"
     irqaffinity: "{{ hostvars[inventory_hostname].config_context.irqaffinity | default('8,9') }}"
+  when: bootloader_default_grub_stat.stat.exists
 
 - name: Set Kernel grub parameters
   ansible.builtin.lineinfile:
     path: /etc/default/grub
     state: present
     line: "GRUB_CMDLINE_LINUX=$GRUB_CMDLINE_LINUX\" mce=ignore_ce nosoftlockup intel_idle.max_cstate=0 processor.max_cstate=0 mitigations=off isolcpus={{ isolate_cpus }} nohz_full={{ isolate_cpus }} rcu_nocbs={{ isolate_cpus }} irqaffinity={{ irqaffinity }} selinux=0 audit=0 pcie_aspm=performance pci=noaer ipv6.disable=1\""
+  when: bootloader_default_grub_stat.stat.exists
   notify: 
     - grub mkconfig

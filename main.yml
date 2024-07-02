@@ -4,4 +4,4 @@
   tasks:
     - import_role:
         name: common
-    
+  

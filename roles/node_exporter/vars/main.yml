@@ -9,3 +9,17 @@ go_arch_map:
 go_arch: "{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}"
 _node_exporter_repo: "prometheus/node_exporter"
 _github_api_headers: "{{ {'GITHUB_TOKEN': lookup('ansible.builtin.env', 'GITHUB_TOKEN')} if (lookup('ansible.builtin.env', 'GITHUB_TOKEN')) else {} }}"
+
+cron_jobs:
+  - name: "Custom script for smartmontools"
+    source: smartmon.sh
+    file: ansible-smartmon  
+    user: root
+    job:  bash /var/lib/node_exporter/smartmon.sh > /var/lib/node_exporter/smartmon.prom
+    minute: "*/5"
+  - name: "Custom script for NVME"
+    source: nvme_metric.sh
+    file: ansible-nvme
+    user: root
+    job: bash /var/lib/node_exporter/nvme_metric.sh > /var/lib/node_exporter/nvme.prom
+    minute: "*/5"

@@ -1,0 +1,4 @@
+#jinja2: trim_blocks: True, lstrip_blocks: True
+{% if item.sudo_cmnd is defined %}
+{{ item.username }} ALL=(ALL) NOPASSWD: {{ item.sudo_cmnd }}
+{% endif %}

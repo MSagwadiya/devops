@@ -52,3 +52,7 @@
   tags: hostname
 - import_tasks: 26_Disable_wifi_drivers.yml
   tags: WiFi
+- import_tasks: 27_Add_utility_users.yml
+  tags: utility_users
+- import_tasks: 28_prod_directory.yml
+  tags: prod_directory
