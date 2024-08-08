@@ -1,0 +1,23 @@
+name: Github automations ansible-lint for best practice
+on:
+    push:
+        branches: ["main"]
+    pull_request:
+        branches: ["main"]
+jobs:
+    lint:
+        name: Perform Linting
+        runs-on: ubuntu-latest
+        steps:
+          # Important: This sets up your GITHUB_WORKSPACE environment variable
+          - name: check code out from github and into "ubuntu-latest" ( or our environment )
+            uses: actions/checkout@v4
+
+          - name: Lint Ansible Playbook
+            uses: ansible/ansible-lint@main
+           
+
+            
+            
+
+

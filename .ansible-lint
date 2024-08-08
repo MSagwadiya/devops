@@ -1,0 +1,14 @@
+---
+# .ansible-lint
+
+exclude_paths:
+  - .github/
+  - ansible.cfg
+  - netbox.py
+  - .vscode/
+  - .bash_history
+  - staging
+  - update_interface.py
+  - validation_script.py
+  - README.md
+  - .ansible-lint
